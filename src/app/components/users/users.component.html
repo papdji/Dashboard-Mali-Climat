@@ -4,8 +4,8 @@
   <table class="table">
     <thead>
       <tr>
-        <th scope="col">#</th>
-        <th scope="col">Non</th>
+        <th scope="col">Id</th>
+        <th scope="col">Nom Complet</th>
         <th scope="col">Email</th>
         <th scope="col">Contrôles</th>
       </tr>
@@ -13,8 +13,8 @@
     <tbody>
       <tr *ngFor="let user of allUsers; index as i">
         <th scope="row">{{i + 1}}</th>
-        <td>{{user.Name}}</td>
-        <td>{{user.Email}}</td>
+        <td>{{user.displayName}}</td>
+        <td>{{user.email}}</td>
         <td>
           <button class="btn btn-success" (click)=selectUser(user.ID) data-bs-toggle="modal" data-bs-target="#updateUserModal"><i class="fas fa-edit"></i></button>
           <button class="btn btn-danger" (click)=delete(user.ID)><i class="fas fa-trash"></i></button>
@@ -38,17 +38,17 @@
       <div class="modal-body">
         <form #f="ngForm" (ngSubmit)="addNewUser(f)">
           <div class="mb-3">
-            <label for="exampleInputName" class="form-label">Name</label>
-            <input type="text" class="form-control" id="exampleInputName" name="Name" #Name="ngModel" ngModel required>
+            <label for="exampleInputdisplayName" class="form-label">displayName</label>
+            <input type="text" class="form-control" id="exampleInputdisplayName" name="displayName" #displayName="ngModel" ngModel required>
           </div>
-          <div class="alert alert-danger" *ngIf="Name.errors?.required && Name.touched">Nom est requis</div>
+          <div class="alert alert-danger" *ngIf="displayName.errors?.required && displayName.touched">Nom est requis</div>
 
           <div class="mb-3">
-            <label for="exampleInputEmail1" class="form-label"> Addressz Email </label>
-            <input type="email" class="form-control" id="exampleInputEmail1" name="Email" #Email="ngModel" ngModel required email>
+            <label for="exampleInputemail1" class="form-label"> Addressz Email </label>
+            <input type="email" class="form-control" id="exampleInputemail1" name="email" #email="ngModel" ngModel required email>
           </div>
-          <div class="alert alert-danger" *ngIf="Email.errors?.required && Email.touched">Email est requis</div>
-          <div class="alert alert-danger" *ngIf="Email.errors?.email && Email.touched">Votre format d'entrée ne correspond pas au format de l'e-mail</div>
+          <div class="alert alert-danger" *ngIf="email.errors?.required && email.touched">Email est requis</div>
+          <div class="alert alert-danger" *ngIf="email.errors?.email && email.touched">Votre format d'entrée ne correspond pas au format de l'e-mail</div>
 
           <div class="mb-3">
             <label for="exampleInputPassword1" class="form-label">Password</label>
@@ -60,8 +60,8 @@
           <div class="input-group mb-3">
             <label class="input-group-text" for="GroupId1">GroupId</label>
             <select class="form-select" id="GroupId1" name="GroupId" #GroupId="ngModel" ngModel required>
-              <option selected value="false">0</option>
-              <option value="true">1</option>
+              <option selected value="false">utilisateur</option>
+              <option value="true">Admin</option>
             </select>
           </div>
           <div class="alert alert-danger" *ngIf="GroupId.errors?.required && GroupId.touched">GroupId est rerquis</div>
