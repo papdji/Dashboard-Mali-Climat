@@ -63,6 +63,7 @@ export class ProductsComponent implements OnInit, OnDestroy {
     this.task.then((data)=> {
       data.ref.getDownloadURL().then((url) => {
         this.imgUrl = url
+        console.log(url)
       })
     })
   }
@@ -72,7 +73,6 @@ export class ProductsComponent implements OnInit, OnDestroy {
     this.afStore.collection("Recommendation").add({
       Name: data.Name,
       Description: data.Description,
-      Price: data.Price,
       userID: data.userId,
       catID: data.categoryId,
       Image: this.imgUrl,
@@ -103,12 +103,11 @@ export class ProductsComponent implements OnInit, OnDestroy {
     this.afStore.collection("Recommendation").doc(data.ID).update({
       Name: data.Name,
       Description: data.Description,
-      Price: data.Price,
       userID: data.userId,
       catID: data.categoryId
     }).then(() => {
       this.closeButtonUpdate.nativeElement.click()
-      this.successMsg = "Product is Updated Successfully"
+      this.successMsg = "Mis en jour avec succès"
     })
   }
 

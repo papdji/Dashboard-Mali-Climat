@@ -5,9 +5,8 @@
     <thead>
       <tr>
         <th scope="col">#</th>
-        <th scope="col">Nom</th>
+        <th scope="col">Name</th>
         <th scope="col">Description</th>
-        <th scope="col">Nombre</th>
         <th scope="col">Image</th>
         <th scope="col">Utilisateur</th>
         <th scope="col">Catégorie</th>
@@ -19,10 +18,9 @@
         <th scope="row">{{i + 1}}</th>
         <td>{{product.Name}}</td>
         <td>{{product.Description}}</td>
-        <td>{{product.Price}}</td>
         <td><img [src]="product.Image" style="max-width: 50px;"></td>
         <ng-container *ngFor="let user of allUsers">
-          <td *ngIf="product.userID == user.ID">{{user.Name}}</td>
+          <td *ngIf="product.userID == user.ID">{{user.displayName}}</td>
         </ng-container>
         <ng-container *ngFor="let cat of allCategories">
           <td *ngIf="product.catID == cat.CatId">{{cat.Name}}</td>
@@ -55,19 +53,13 @@
             <label for="exampleInputName" class="form-label">Name</label>
             <input type="text" class="form-control" id="exampleInputName" name="Name" #Name="ngModel" ngModel required>
           </div>
-          <div class="alert alert-danger" *ngIf="Name.errors?.required && Name.touched">Nom est requis</div>
+          <div class="alert alert-danger" *ngIf="Name.errors?.required && Name.touched">Nom de la ville est requis</div>
 
           <div class="mb-3">
             <label for="exampleInputDescription" class="form-label">Description</label>
             <input type="text" class="form-control" id="exampleInputDescription" name="Description" #Description="ngModel" ngModel required>
           </div>
           <div class="alert alert-danger" *ngIf="Description.errors?.required && Description.touched">Description est requis</div>
-
-          <div class="mb-3">
-            <label for="exampleInputPrice" class="form-label">Price</label>
-            <input type="number" class="form-control" id="exampleInputPrice" name="Price" #Price="ngModel" ngModel required>
-          </div>
-          <div class="alert alert-danger" *ngIf="Price.errors?.required && Price.touched">Nombre est requis</div>
 
           <div class="mb-3">
             <label for="exampleInputImage" class="form-label">Image</label>
@@ -79,14 +71,14 @@
           <div class="alert alert-danger" *ngIf="Image.errors?.required && Image.touched">Image est rquis</div>
 
           <div class="input-group mb-3">
-            <label class="input-group-text" for="users">Users</label>
+            <label class="input-group-text" for="users">Utilisateur</label>
             <select class="form-select" id="users" name="userId" #userId="ngModel" ngModel required>
               <ng-container *ngFor="let user of allUsers">
-                <option [value]="user.ID">{{user.Name}}</option>
+                <option [value]="user.ID">{{user.displayName}}</option>
               </ng-container>
             </select>
           </div>
-          <div class="alert alert-danger" *ngIf="userId.errors?.required && userId.touched">user name Is Required</div>
+          <div class="alert alert-danger" *ngIf="userId.errors?.required && userId.touched">user name est Requis</div>
 
           <div class="input-group mb-3">
             <label class="input-group-text" for="category">Categories</label>
@@ -137,17 +129,11 @@
           </div>
           <div class="alert alert-danger" *ngIf="Description.errors?.required && Description.touched">Description Is Required</div>
 
-          <div class="mb-3">
-            <label for="exampleInputPrice" class="form-label">Price</label>
-            <input type="number" class="form-control" id="exampleInputPrice" name="Price" #Price="ngModel" [(ngModel)]="product.Price" required>
-          </div>
-          <div class="alert alert-danger" *ngIf="Price.errors?.required && Price.touched">Price Is Required</div>
-
           <div class="input-group mb-3">
-            <label class="input-group-text" for="users">Users</label>
+            <label class="input-group-text" for="users">Utilisateur</label>
             <select class="form-select" id="users" name="userId" #userId="ngModel" [(ngModel)]="product.userID" required>
               <ng-container *ngFor="let user of allUsers">
-                <option [value]="user.ID">{{user.Name}}</option>
+                <option [value]="user.ID">{{user.displayName}}</option>
               </ng-container>
             </select>
           </div>
@@ -161,11 +147,11 @@
               </ng-container>
             </select>
           </div>
-          <div class="alert alert-danger" *ngIf="categoryId.errors?.required && categoryId.touched">category name Is Required</div>
+          <div class="alert alert-danger" *ngIf="categoryId.errors?.required && categoryId.touched">category name est Requis</div>
 
           <div class="modal-footer">
-            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-            <button type="button" type="submit" class="btn btn-primary" [disabled]="updateF.invalid">Update</button>
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fermer</button>
+            <button type="button" type="submit" class="btn btn-primary" [disabled]="updateF.invalid">Mettre à jour</button>
           </div>
         </form>
       </div>
