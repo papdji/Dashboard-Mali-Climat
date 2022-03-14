@@ -31,7 +31,7 @@ export class UsersComponent implements OnInit {
     let data = form.value
     this.userServ.addUser(data.email, data.Password).then(user => {
       this.afStore.collection("users").doc(user.user?.uid).set({
-        displayName: data.displayName,
+        name: data.name,
         email: data.email,
         ID: user.user?.uid,
         GroupId: data.GroupId,
@@ -52,7 +52,7 @@ export class UsersComponent implements OnInit {
   updateUser(updateData: NgForm) {
     let data = updateData.value
     this.afStore.collection("users").doc(data.userID).update({
-      displayName: data.displayName,
+      name: data.name,
       email: data.email,
       GroupId: data.GroupId
     }).then(() => {

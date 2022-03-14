@@ -70,7 +70,7 @@ export class ProductsComponent implements OnInit, OnDestroy {
 
   addNewProduct(form: NgForm) {
     let data = form.value
-    this.afStore.collection("Recommendation").add({
+    this.afStore.collection("Conseil").add({
       Name: data.Name,
       Description: data.Description,
       userID: data.userId,
@@ -81,12 +81,12 @@ export class ProductsComponent implements OnInit, OnDestroy {
       this.router.navigate(['/products'])
       form.reset()
       this.closeButton.nativeElement.click()
-      this.successMsg = "Recommendation ajouter avec succès"
+      this.successMsg = "Conseil ajouter avec succès"
   })
 
   this.getProducts = this.proServ.getProductsData().subscribe((data) => {
     data.map(element => {
-      this.afStore.collection("Recommendation").doc(element.payload.doc.id).update({
+      this.afStore.collection("Conseil").doc(element.payload.doc.id).update({
         ID: element.payload.doc.id
       })
     })
@@ -100,7 +100,7 @@ export class ProductsComponent implements OnInit, OnDestroy {
 
   updateProduct(updateData: NgForm) {
     let data = updateData.value
-    this.afStore.collection("Recommendation").doc(data.ID).update({
+    this.afStore.collection("Conseil").doc(data.ID).update({
       Name: data.Name,
       Description: data.Description,
       userID: data.userId,
@@ -113,7 +113,7 @@ export class ProductsComponent implements OnInit, OnDestroy {
 
   delete(id:string) {
     this.proServ.deleteProduct(id).then(() => {
-      this.successMsg = "Recommendation supprimé avec succès"
+      this.successMsg = "Conseil supprimé avec succès"
     })
   }
 

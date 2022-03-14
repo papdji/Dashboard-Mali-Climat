@@ -35,7 +35,7 @@ export class CategoriesComponent implements OnInit, OnDestroy {
 
   addNewCategory(form: NgForm) {
     let data = form.value
-    this.afStore.collection('Alertes').add({
+    this.afStore.collection('Categorie').add({
       Name: data.Name,
       CatId: Math.random().toString(36).substr(2, 9)
     }).then(() => {
@@ -46,7 +46,7 @@ export class CategoriesComponent implements OnInit, OnDestroy {
   })
   this.updateID = this.catServ.getCategoriesData().subscribe((data) => {
     data.map(element => {
-      this.afStore.collection("Alertes").doc(element.payload.doc.id).update({
+      this.afStore.collection("Categorie").doc(element.payload.doc.id).update({
         CatId: element.payload.doc.id
       })
     })
@@ -61,7 +61,7 @@ export class CategoriesComponent implements OnInit, OnDestroy {
 
   updateCategory(updateData: NgForm) {
     let data = updateData.value
-    this.afStore.collection("Alertes").doc(data.CatId).update({
+    this.afStore.collection("Categorie").doc(data.CatId).update({
       Name: data.Name,
     }).then(() => {
       this.closeButtonUpdate.nativeElement.click()

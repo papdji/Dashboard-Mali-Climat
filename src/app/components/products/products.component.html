@@ -1,6 +1,6 @@
 <div class="container">
-  <h2 class="text-center">Tous les Alertes</h2>
-  <button class="btn btn-success" data-bs-toggle="modal" data-bs-target="#addProductModal">Ajouter un nouveau Alerte</button>
+  <h2 class="text-center">Tous les Conseils</h2>
+  <button class="btn btn-success" data-bs-toggle="modal" data-bs-target="#addProductModal">Ajouter un nouveau Conseil</button>
   <table class="table">
     <thead>
       <tr>
@@ -20,7 +20,7 @@
         <td>{{product.Description}}</td>
         <td><img [src]="product.Image" style="max-width: 50px;"></td>
         <ng-container *ngFor="let user of allUsers">
-          <td *ngIf="product.userID == user.ID">{{user.displayName}}</td>
+          <td *ngIf="product.userID == user.UID">{{user.name}}</td>
         </ng-container>
         <ng-container *ngFor="let cat of allCategories">
           <td *ngIf="product.catID == cat.CatId">{{cat.Name}}</td>
@@ -74,7 +74,7 @@
             <label class="input-group-text" for="users">Utilisateur</label>
             <select class="form-select" id="users" name="userId" #userId="ngModel" ngModel required>
               <ng-container *ngFor="let user of allUsers">
-                <option [value]="user.ID">{{user.displayName}}</option>
+                <option [value]="user.ID">{{user.name}}</option>
               </ng-container>
             </select>
           </div>
@@ -133,7 +133,7 @@
             <label class="input-group-text" for="users">Utilisateur</label>
             <select class="form-select" id="users" name="userId" #userId="ngModel" [(ngModel)]="product.userID" required>
               <ng-container *ngFor="let user of allUsers">
-                <option [value]="user.ID">{{user.displayName}}</option>
+                <option [value]="user.ID">{{user.name}}</option>
               </ng-container>
             </select>
           </div>

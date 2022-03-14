@@ -13,7 +13,7 @@
     <tbody>
       <tr *ngFor="let user of allUsers; index as i">
         <th scope="row">{{i + 1}}</th>
-        <td>{{user.displayName}}</td>
+        <td>{{user.name}}</td>
         <td>{{user.email}}</td>
         <td>
           <button class="btn btn-success" (click)=selectUser(user.ID) data-bs-toggle="modal" data-bs-target="#updateUserModal"><i class="fas fa-edit"></i></button>
@@ -38,10 +38,10 @@
       <div class="modal-body">
         <form #f="ngForm" (ngSubmit)="addNewUser(f)">
           <div class="mb-3">
-            <label for="exampleInputdisplayName" class="form-label">displayName</label>
-            <input type="text" class="form-control" id="exampleInputdisplayName" name="displayName" #displayName="ngModel" ngModel required>
+            <label for="exampleInputname" class="form-label">Nom</label>
+            <input type="text" class="form-control" id="exampleInputname" name="name" #name="ngModel" ngModel required>
           </div>
-          <div class="alert alert-danger" *ngIf="displayName.errors?.required && displayName.touched">Nom est requis</div>
+          <div class="alert alert-danger" *ngIf="name.errors?.required && name.touched">Nom est requis</div>
 
           <div class="mb-3">
             <label for="exampleInputemail1" class="form-label"> Addressz Email </label>

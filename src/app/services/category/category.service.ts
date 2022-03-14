@@ -9,14 +9,14 @@ export class CategoryService {
   constructor(private afStore: AngularFirestore) { }
 
   getCategoriesData() {
-    return this.afStore.collection("Alertes").snapshotChanges();
+    return this.afStore.collection("Categorie").snapshotChanges();
    }
 
    getCategoryData(id: string) {
-     return this.afStore.collection("Alertes").ref.doc(id).get();
+     return this.afStore.collection("Categorie").ref.doc(id).get();
    }
 
    deleteCategory(id:string) {
-     return this.afStore.collection("Alertes").doc(id).delete()
+     return this.afStore.collection("Categorie").doc(id).delete()
    }
 }
