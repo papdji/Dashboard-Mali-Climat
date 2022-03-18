@@ -15,7 +15,7 @@ export class UserService {
   }
 
   getUserData(id: string) {
-    return this.afStore.collection("users").ref.doc(id).get();
+    return this.afStore.collection("users").doc(id);
   }
 
   addUser(email: string, password: string) {

@@ -33,8 +33,8 @@ export class UsersComponent implements OnInit {
       this.afStore.collection("users").doc(user.user?.uid).set({
         name: data.name,
         email: data.email,
-        ID: user.user?.uid,
-        GroupId: data.GroupId,
+        uid: user.user?.uid,
+        profile: data.profile,
       }).then(() => {
         this.router.navigate(['/users'])
         this.closeButton.nativeElement.click()
@@ -44,17 +44,20 @@ export class UsersComponent implements OnInit {
   }
 
   selectUser(id:string) {
-    this.userServ.getUserData(id).then(data => {
-      this.user = data.data()
+    this.userServ.getUserData(id).valueChanges().subscribe(user=>{
+      this.user = user;
+      console.log(this.user.name);
+
+
     })
   }
 
   updateUser(updateData: NgForm) {
     let data = updateData.value
-    this.afStore.collection("users").doc(data.userID).update({
+    this.afStore.collection("users").doc(data.uid).update({
       name: data.name,
       email: data.email,
-      GroupId: data.GroupId
+      profile: data.profile
     }).then(() => {
       this.closeButtonUpdate.nativeElement.click()
       this.successMsg = "utilisateur modifier avec succès"

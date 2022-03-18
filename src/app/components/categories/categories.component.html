@@ -37,7 +37,7 @@
         <form #f="ngForm" (ngSubmit)="addNewCategory(f)">
           <input type="hidden" name="CatId" #CatId="ngModel" ngModel>
           <div class="mb-3">
-            <label for="exampleInputName" class="form-label">Name</label>
+            <label for="exampleInputName" class="form-label">Nom</label>
             <input type="text" class="form-control" id="exampleInputName" name="Name" #Name="ngModel" ngModel required>
           </div>
           <div class="alert alert-danger" *ngIf="Name.errors?.required && Name.touched">Nom est requis</div>

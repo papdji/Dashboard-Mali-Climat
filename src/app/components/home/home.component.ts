@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { AngularFireAuth } from '@angular/fire/auth';
 import { Router } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { AuthService } from 'src/app/services/Auth/auth.service';
@@ -20,9 +21,12 @@ export class HomeComponent implements OnInit {
   allProducts: any = []
   getProducts?: Subscription
 
-  constructor(private userServ: UserService, private catServ: CategoryService, private proServ: ProductService) {
+  constructor(private userServ: UserService, private catServ: CategoryService, private proServ: ProductService,
+    private afAuth:AngularFireAuth) {
 
-    this.getUsers = this.userServ.getUsersData().subscribe(data=> this.allUsers = data)
+    this.getUsers = this.userServ.getUsersData().subscribe(data=> this.allUsers = data);
+
+
 
     this.getCategories = this.catServ.getCategoriesData().subscribe(data=> {
       this.allCategories = data.map(element => {

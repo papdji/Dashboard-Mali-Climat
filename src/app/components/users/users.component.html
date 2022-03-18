@@ -16,8 +16,8 @@
         <td>{{user.name}}</td>
         <td>{{user.email}}</td>
         <td>
-          <button class="btn btn-success" (click)=selectUser(user.ID) data-bs-toggle="modal" data-bs-target="#updateUserModal"><i class="fas fa-edit"></i></button>
-          <button class="btn btn-danger" (click)=delete(user.ID)><i class="fas fa-trash"></i></button>
+          <button class="btn btn-success" (click)=selectUser(user.uid) data-bs-toggle="modal" data-bs-target="#updateUserModal"><i class="fas fa-edit"></i></button>
+          <button class="btn btn-danger" (click)=delete(user.uid)><i class="fas fa-trash"></i></button>
         </td>
       </tr>
     </tbody>
@@ -58,13 +58,13 @@
           <div class="alert alert-danger" *ngIf="Password.errors?.minlength && Password.touched">La longueur du mot de passe doit être égale à 6 ou +6</div>
 
           <div class="input-group mb-3">
-            <label class="input-group-text" for="GroupId1">GroupId</label>
-            <select class="form-select" id="GroupId1" name="GroupId" #GroupId="ngModel" ngModel required>
-              <option selected value="false">utilisateur</option>
-              <option value="true">Admin</option>
+            <label class="input-group-text" for="profile">Profile</label>
+            <select class="form-select" id="profile" name="profile" #profile="ngModel" ngModel required>
+              <option selected value="utilisateur">utilisateur</option>
+              <option value="Admin">Admin</option>
             </select>
           </div>
-          <div class="alert alert-danger" *ngIf="GroupId.errors?.required && GroupId.touched">GroupId est rerquis</div>
+          <div class="alert alert-danger" *ngIf="profile.errors?.required && profile.touched">Profile est rerquis</div>
           <div class="modal-footer">
             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fermer</button>
             <button type="button" type="submit" class="btn btn-primary" [disabled]="f.invalid">Ajouter</button>
@@ -84,34 +84,34 @@
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="updateUserModalLabel">Mettre à jour {{user.Name}} Utilisateur</h5>
+        <h5 class="modal-title" id="updateUserModalLabel">Mettre à jour {{user.name}} Utilisateur</h5>
         <button type="button" class="btn-close" #closeButtonUpdate data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body">
         <form #updateF="ngForm" (ngSubmit)="updateUser(updateF)">
 
-          <input type="hidden" name="userID" #userID="ngModel" [(ngModel)]="user.ID">
+          <input type="hidden" name="uid" #uid="ngModel" [(ngModel)]="user.uid">
           <div class="mb-3">
-            <label for="exampleInputName1" class="form-label">Name</label>
-            <input type="text" class="form-control" id="exampleInputName1" name="Name" #Name="ngModel" [(ngModel)]="user.Name" required>
+            <label for="exampleInputName1" class="form-label">Nom</label>
+            <input type="text" class="form-control" id="exampleInputName1" name="name" #name="ngModel" [(ngModel)]="user.name" required>
           </div>
-          <div class="alert alert-danger" *ngIf="Name.errors?.required && Name.touched">Nom est requis</div>
+          <div class="alert alert-danger" *ngIf="name.errors?.required && name.touched">Nom est requis</div>
 
           <div class="mb-3">
             <label for="exampleInputEmail2" class="form-label">  Address Email</label>
-            <input type="email" class="form-control" id="exampleInputEmail2" name="Email" #Email="ngModel" [(ngModel)]="user.Email" required email>
+            <input type="email" class="form-control" id="exampleInputEmail2" name="email" #email="ngModel" [(ngModel)]="user.email" required email>
           </div>
-          <div class="alert alert-danger" *ngIf="Email.errors?.required && Email.touched">Email est requis</div>
-          <div class="alert alert-danger" *ngIf="Email.errors?.email && Email.touched">Votre format d'entrée ne correspond pas au format de l'e-mail</div>
+          <div class="alert alert-danger" *ngIf="email.errors?.required && email.touched">Email est requis</div>
+          <div class="alert alert-danger" *ngIf="email.errors?.email && email.touched">Votre format d'entrée ne correspond pas au format de l'e-mail</div>
 
           <div class="input-group mb-3">
-            <label class="input-group-text" for="GroupId2">GroupId</label>
-            <select class="form-select" id="GroupId2" name="GroupId" #GroupId="ngModel" [(ngModel)]="user.GroupId" required>
-              <option selected value="false">0</option>
-              <option value="true">1</option>
+            <label class="input-group-text" for="profile">Profile</label>
+            <select class="form-select" id="profile" name="profile" #profile="ngModel" [(ngModel)]="user.profile" required>
+              <option selected value="utilisateur">utilisateur</option>
+              <option value="Admin">Admin</option>
             </select>
           </div>
-          <div class="alert alert-danger" *ngIf="GroupId.errors?.required && GroupId.touched">GroupId est requis</div>
+          <div class="alert alert-danger" *ngIf="profile.errors?.required && profile.touched">profile est requis</div>
           <div class="modal-footer">
             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fermer</button>
             <button type="button" type="submit" class="btn btn-primary" [disabled]="updateF.invalid">Mettre à jour</button>
