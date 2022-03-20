@@ -14,13 +14,14 @@
       </tr>
     </thead>
     <tbody>
-      <tr *ngFor="let product of allProducts; index as i">
+      <tr *ngFor="let post of allPosts; index as i">
         <th scope="row">{{i + 1}}</th>
-        <td>{{product.Name}}</td>
-        <td>{{product.Description}}</td>
+        <td>{{ post.from }}</td>
+        <td>{{ post.createdAt?.toMillis() | date:'short' }}</td>
+        <td>{{ post.ville }}</td>
         <td><img [src]="product.Image" style="max-width: 50px;"></td>
         <ng-container *ngFor="let user of allUsers">
-          <td *ngIf="product.userID == user.ID">{{user.name}}</td>
+          <td *ngIf="product.uid == uid">{{user.name}}</td>
         </ng-container>
         <ng-container *ngFor="let cat of allCategories">
           <td *ngIf="product.catID == cat.CatId">{{cat.Name}}</td>
@@ -72,13 +73,13 @@
 
           <div class="input-group mb-3">
             <label class="input-group-text" for="users">Utilisateur</label>
-            <select class="form-select" id="users" name="userId" #userId="ngModel" ngModel required>
+            <select class="form-select" id="users" name="uid" #uid="ngModel" ngModel required>
               <ng-container *ngFor="let user of allUsers">
-                <option [value]="user.ID">{{user.name}}</option>
+                <option [value]="uid">{{user.name}}</option>
               </ng-container>
             </select>
           </div>
-          <div class="alert alert-danger" *ngIf="userId.errors?.required && userId.touched">Nom d'utilisateur est requis</div>
+          <div class="alert alert-danger" *ngIf="uid.errors?.required && uid.touched">Nom d'utilisateur est requis</div>
 
           <div class="input-group mb-3">
             <label class="input-group-text" for="category">Categories</label>
@@ -131,13 +132,13 @@
 
           <div class="input-group mb-3">
             <label class="input-group-text" for="users">Utilisateur</label>
-            <select class="form-select" id="users" name="userId" #userId="ngModel" [(ngModel)]="product.userID" required>
+            <select class="form-select" id="users" name="uid" #uid="ngModel" [(ngModel)]="product.uid" required>
               <ng-container *ngFor="let user of allUsers">
-                <option [value]="user.ID">{{user.name}}</option>
+                <option [value]="uid">{{user.name}}</option>
               </ng-container>
             </select>
           </div>
-          <div class="alert alert-danger" *ngIf="userId.errors?.required && userId.touched">Nom d'utilisateur Requis</div>
+          <div class="alert alert-danger" *ngIf="uid.errors?.required && uid.touched">Nom d'utilisateur Requis</div>
 
           <div class="input-group mb-3">
             <label class="input-group-text" for="category">Categories</label>

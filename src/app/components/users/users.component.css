@@ -1,11 +1,15 @@
 h2 {
-  margin: 10px 0;
+  margin: 30px;
 }
 
-table {
-  margin-top: 10px;
-}
+/* tbl {
+  margin-top: 30px;
+  text-justify: auto;
+  justify-content: center;
+  justify-items: left;
+  margin-left: 10px;
+} */
 
 table button {
-  margin: 0 3px;
+  margin: 3px;
 }

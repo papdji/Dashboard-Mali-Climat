@@ -16,6 +16,10 @@ import { SidebarComponent } from './components/sidebar/sidebar.component';
 import { UsersComponent } from './components/users/users.component';
 import { CategoriesComponent } from './components/categories/categories.component';
 import { ProductsComponent } from './components/products/products.component';
+import { LoginComponent } from './login/login.component';
+import { SignupComponent } from './signup/signup.component';
+import { NewPostComponent } from './new-post/new-post.component';
+import { PostsComponent } from './posts/posts.component';
 
 @NgModule({
   declarations: [
@@ -26,6 +30,10 @@ import { ProductsComponent } from './components/products/products.component';
     UsersComponent,
     CategoriesComponent,
     ProductsComponent,
+    LoginComponent,
+    SignupComponent,
+    NewPostComponent,
+    PostsComponent,
   ],
   imports: [
     BrowserModule,

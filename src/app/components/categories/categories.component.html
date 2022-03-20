@@ -1,25 +1,28 @@
 <div class="container">
   <h2 class="text-center">Tous les Catégories</h2>
   <button class="btn btn-success" data-bs-toggle="modal" data-bs-target="#addCategoryModal">Ajouter une nouvelle catégorie</button>
-  <table class="table">
-    <thead>
-      <tr>
-        <th scope="col">Id</th>
-        <th scope="col">Nom</th>
-        <th scope="col">Contrôles</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr *ngFor="let category of allCategories; index as i">
-        <th scope="row">{{i + 1}}</th>
-        <td>{{category.Name}}</td>
-        <td>
-          <button class="btn btn-success" (click)=selectCategory(category.CatId) data-bs-toggle="modal" data-bs-target="#updateCategoryModal"><i class="fas fa-edit"></i></button>
-          <button class="btn btn-danger" (click)=delete(category.CatId)><i class="fas fa-trash"></i></button>
-        </td>
-      </tr>
-    </tbody>
-  </table>
+  <div class="col-md-6">
+    <table class="table" >
+      <thead>
+        <tr>
+          <th scope="col">Id</th>
+          <th scope="col">Nom</th>
+          <th scope="col">Contrôles</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let category of allCategories; index as i">
+          <th scope="row">{{i + 1}}</th>
+          <td>{{category.Name}}</td>
+          <td>
+            <button class="btn btn-success" (click)=selectCategory(category.CatId) data-bs-toggle="modal" data-bs-target="#updateCategoryModal"><i class="fas fa-edit"></i></button>
+            <button class="btn btn-danger" (click)=delete(category.CatId)><i class="fas fa-trash"></i></button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
   <div class="alert alert-success" *ngIf="successMsg">{{successMsg}}</div>
 </div>
 

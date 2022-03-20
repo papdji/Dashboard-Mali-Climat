@@ -14,7 +14,9 @@ import { ProductService } from 'src/app/services/product/product.service';
   styleUrls: ['./products.component.css']
 })
 export class ProductsComponent implements OnInit, OnDestroy {
-
+  public allPosts:any;
+  public postsId : any;
+  public users :any;
   allUsers : any = []
   getUsers?: Subscription
   allCategories : any = []
@@ -33,19 +35,42 @@ export class ProductsComponent implements OnInit, OnDestroy {
   product: any = []
   getProducts?: Subscription
 
-  constructor(private userServ: UserService, private catServ: CategoryService, private afStore: AngularFirestore, private afStorage: AngularFireStorage, private router: Router, private proServ: ProductService) {
+  constructor(private userServ: UserService,
+     private catServ: CategoryService, private afStore: AngularFirestore,
+     private afStorage: AngularFireStorage, private router: Router,
+     private proServ: ProductService) {
 
-    this.getUsers = this.userServ.getUsersData().subscribe(data=> this.allUsers = data)
+    this.getUsers = this.userServ.getUsersData().subscribe(data=> this.allUsers = data);
 
     this.getCategories = this.catServ.getCategoriesData().subscribe(data=> {
       this.allCategories = data.map(element => {
         return element.payload.doc.data()
       })
-    })
+    });
 
     this.getProducts = this.proServ.getProductsData().subscribe(data => {
       this.allProducts = data.map(element => {
         return element.payload.doc.data()
+      })
+    });
+
+
+
+    this.afStore.firestore.collection("posts").get().then(snapshot=>{
+      snapshot.forEach(doc=>{
+        this.allPosts = doc.data();
+        console.log(this.allPosts);
+
+        this.postsId = doc.id;
+        this.afStore.collection("users").doc(this.allPosts.from).valueChanges().subscribe(user=>{
+          this.users = user;
+          console.log(this.users);
+
+        })
+        // this.afStore.collection("posts").doc(this.postsId).collection("comments").valueChanges().subscribe(comment=>{
+        //   console.log(comment);
+
+        // })
       })
     })
 
@@ -70,10 +95,12 @@ export class ProductsComponent implements OnInit, OnDestroy {
 
   addNewProduct(form: NgForm) {
     let data = form.value
-    this.afStore.collection("Conseil").add({
+    console.log(data);
+
+    this.afStore.collection("posts").add({
       Name: data.Name,
       Description: data.Description,
-      userID: data.userId,
+      uid: data.uid,
       catID: data.categoryId,
       Image: this.imgUrl,
       ID: Math.random().toString(36).substr(2, 9)
@@ -86,7 +113,7 @@ export class ProductsComponent implements OnInit, OnDestroy {
 
   this.getProducts = this.proServ.getProductsData().subscribe((data) => {
     data.map(element => {
-      this.afStore.collection("Conseil").doc(element.payload.doc.id).update({
+      this.afStore.collection("posts").doc(element.payload.doc.id).update({
         ID: element.payload.doc.id
       })
     })
@@ -100,7 +127,7 @@ export class ProductsComponent implements OnInit, OnDestroy {
 
   updateProduct(updateData: NgForm) {
     let data = updateData.value
-    this.afStore.collection("Conseil").doc(data.ID).update({
+    this.afStore.collection("posts").doc(data.ID).update({
       Name: data.Name,
       Description: data.Description,
       userID: data.userId,

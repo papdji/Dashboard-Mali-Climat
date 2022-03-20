@@ -11,10 +11,6 @@ export class AppComponent {
   private postData : any;
 
   constructor(private db: AngularFirestore) {
-    this.db.collection("posts").valueChanges().subscribe(post=>{
-      this.postData = post;
-      // this.getData(this.postData.id);
-    })
 
 
   }
