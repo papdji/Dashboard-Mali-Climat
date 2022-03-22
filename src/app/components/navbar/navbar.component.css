@@ -1,18 +1,19 @@
 .header {
   background-image: url(../../../assets/images/header.png);
+  background-repeat: no-repeat;
+  background-size: cover;
   color: #fff;
-  padding: 15px 30px;
-  
-
+  padding: 20px;
 }
 
 .header .top-header {
   padding: 0;
   margin: 0;
-  max-width: 1300px;
+  max-width: 1200px;
+  width: 100%;
 }
 
-.header h3 {
+.header h1 {
   color: #f08804;
   margin: 0;
 }

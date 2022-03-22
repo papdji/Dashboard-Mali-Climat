@@ -3,20 +3,21 @@
     <div class="row">
       <div class="col-md-12">
         <div class="card">
-          <div class="card-header card-header-danger">
+          <div class="card-header-tabs">
             <h2 class="text-center">Tous les utilisateurs</h2>
-            <button class="btn btn-success" data-bs-toggle="modal" data-bs-target="#addUserModal">Ajouter un nouveau
+            <button class="glow-on-hover" color="success" data-bs-toggle="modal" data-bs-target="#addUserModal">Ajouter un
               Acteur climat</button>
             <div class="alert alert-success" *ngIf="successMsg">{{successMsg}}</div>
           </div>
           <div class="card-body">
             <div class="table-responsive">
               <table class="table">
-                  <thead class=" text-primary">
+                  <thead class="text-primary">
                     <tr>
                       <th>Id</th>
                       <th>Nom Complet</th>
                       <th>Email</th>
+                      <th>Profile</th>
                       <th>Action</th>
                     </tr>
                   </thead>
@@ -25,6 +26,7 @@
                       <th scope="row">{{i + 1}}</th>
                       <td>{{user.name}}</td>
                       <td>{{user.email}}</td>
+                      <td>{{user.profile}}</td>
                       <td>
                         <button class="btn btn-success" (click)=selectUser(user.uid) data-bs-toggle="modal"
                           data-bs-target="#updateUserModal"><i class="fas fa-edit"></i></button>
@@ -56,11 +58,11 @@
 
 <!-- Start Add User Modal -->
 
-<div class="modal fade" id="addUserModal" tabindex="-1" aria-labelledby="addUserModalLabel" aria-hidden="true">
+<<div class="modal fade" id="addUserModal" tabindex="-1" aria-labelledby="addUserModalLabel" aria-hidden="true">
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="addUserModalLabel">Ajouter un nouvel utilisateur</h5>
+        <h5 class="modal-title" id="addUserModalLabel">Ajouter un nouvel Acteur climat</h5>
         <button type="button" class="btn-close" #closeButton data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body">
@@ -93,8 +95,8 @@
           <div class="input-group mb-3">
             <label class="input-group-text" for="profile">Profile</label>
             <select class="form-select" id="profile" name="profile" #profile="ngModel" ngModel required>
-              <option selected value="utilisateur">utilisateur</option>
-              <option value="Admin">Admin</option>
+              <option selected value="Utilisateur">Utilisateur</option>
+              <option value="Acteur climat">Acteur climat</option>
             </select>
           </div>
           <div class="alert alert-danger" *ngIf="profile.errors?.required && profile.touched">Profile est rerquis</div>
@@ -144,8 +146,8 @@
             <label class="input-group-text" for="profile">Profile</label>
             <select class="form-select" id="profile" name="profile" #profile="ngModel" [(ngModel)]="user.profile"
               required>
-              <option selected value="utilisateur">utilisateur</option>
-              <option value="Admin">Admin</option>
+              <option selected value="Utilisateur">Utilisateur</option>
+              <option value="Acteur climat">Acteur climat</option>
             </select>
           </div>
           <div class="alert alert-danger" *ngIf="profile.errors?.required && profile.touched">profile est requis</div>
