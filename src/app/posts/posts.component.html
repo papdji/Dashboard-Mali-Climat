@@ -1,24 +1,25 @@
 <div class="container">
   <h2 class="text-center">Tous les Conseils</h2>
-  <button class="btn btn-success" data-bs-toggle="modal" data-bs-target="#addProductModal">Ajouter un nouveau Conseil</button>
+  <button class="glow-on-hover" color="btn btn-success" data-bs-toggle="modal" data-bs-target="#addProductModal">Ajouter un nouveau Conseil</button>
   <table class="table">
     <thead>
       <tr>
-        <th scope="col">#</th>
+        <th scope="col">Id</th>
         <th scope="col">Non de la ville</th>
-        <th scope="col">Description</th>
+        <th scope="col">Messages</th>
         <th scope="col">Image</th>
         <th scope="col">Utilisateur</th>
-        <th scope="col">Catégorie</th>
-        <th scope="col">Contrôles</th>
+        <th scope="col">Type</th>
+        <th scope="col">Action</th>
       </tr>
     </thead>
     <tbody>
       <tr *ngFor="let post of allPosts; index as i">
         <th scope="row">{{i + 1}}</th>
-        <td><h1>{{ post.from }}</h1></td>
-        <td>{{ post.createdAt?.toMillis() | date:'short' }}</td>
+        <td>{{ post.from }}</td>
         <td>{{ post.ville }}</td>
+        <td>{{ post.msg }}</td>
+        <td>{{ post.createdAt?.toMillis() | date:'short' }}</td>
         <td>{{ post.countComments }} Réponse</td>
         <ng-container *ngFor="let user of allUsers">
           <!-- <td *ngIf="post.uid == uid">{{user.name}}</td> -->
