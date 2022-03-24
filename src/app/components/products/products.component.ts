@@ -19,8 +19,9 @@ export class ProductsComponent implements OnInit, OnDestroy {
   public users :any;
   allUsers : any = []
   getUsers?: Subscription
-  allCategories : any = []
-  getCategories?: Subscription
+  allCategories : any = [];
+  today:any;
+  // getCategories?: Subscription
 
   task?: AngularFireUploadTask
   ref?: AngularFireStorageReference
@@ -42,11 +43,11 @@ export class ProductsComponent implements OnInit, OnDestroy {
 
     this.getUsers = this.userServ.getUsersData().subscribe(data=> this.allUsers = data);
 
-    this.getCategories = this.catServ.getCategoriesData().subscribe(data=> {
-      this.allCategories = data.map(element => {
-        return element.payload.doc.data()
-      })
-    });
+    // this.getCategories = this.catServ.getCategoriesData().subscribe(data=> {
+    //   this.allCategories = data.map(element => {
+    //     return element.payload.doc.data()
+    //   })
+    // });
 
     this.getProducts = this.proServ.getProductsData().subscribe(data => {
       this.allProducts = data.map(element => {
@@ -56,7 +57,7 @@ export class ProductsComponent implements OnInit, OnDestroy {
 
 
 
-    this.afStore.firestore.collection("posts").get().then(snapshot=>{
+    this.afStore.firestore.collection("conseils").get().then(snapshot=>{
       snapshot.forEach(doc=>{
         this.allPosts = doc.data();
         console.log(this.allPosts);
@@ -96,12 +97,20 @@ export class ProductsComponent implements OnInit, OnDestroy {
   addNewProduct(form: NgForm) {
     let data = form.value
     console.log(data);
+    this.today = new Date();
+    var dd = String(this.today.getDate()).padStart(2, '0');
+    var mm = String(this.today.getMonth() + 1).padStart(2, '0'); //January is 0!
+    var yyyy = this.today.getFullYear();
 
-    this.afStore.collection("posts").add({
+    this.today = mm + '/' + dd + '/' + yyyy;
+    console.log(this.today);
+
+    this.afStore.collection("conseils").add({
       Name: data.Name,
       Description: data.Description,
-      uid: data.uid,
-      catID: data.categoryId,
+      // uid: data.uid,
+      // catID: data.categoryId,
+      "Date":this.today,
       Image: this.imgUrl,
       ID: Math.random().toString(36).substr(2, 9)
     }).then(() => {
@@ -113,7 +122,7 @@ export class ProductsComponent implements OnInit, OnDestroy {
 
   this.getProducts = this.proServ.getProductsData().subscribe((data) => {
     data.map(element => {
-      this.afStore.collection("posts").doc(element.payload.doc.id).update({
+      this.afStore.collection("conseils").doc(element.payload.doc.id).update({
         ID: element.payload.doc.id
       })
     })
@@ -127,11 +136,13 @@ export class ProductsComponent implements OnInit, OnDestroy {
 
   updateProduct(updateData: NgForm) {
     let data = updateData.value
-    this.afStore.collection("posts").doc(data.ID).update({
+    this.afStore.collection("conseils").doc(data.ID).update({
       Name: data.Name,
       Description: data.Description,
-      userID: data.userId,
-      catID: data.categoryId
+      Image: this.imgUrl,
+      ID: Math.random().toString(36).substr(2, 9)
+      // userID: data.userId,
+      // catID: data.categoryId
     }).then(() => {
       this.closeButtonUpdate.nativeElement.click()
       this.successMsg = "Mis en jour avec succès"
@@ -145,8 +156,8 @@ export class ProductsComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy(): void {
-    this.getCategories?.unsubscribe()
-    this.getUsers?.unsubscribe()
+    // this.getCategories?.unsubscribe()
+    // this.getUsers?.unsubscribe()
     this.getProducts?.unsubscribe()
   }
 }

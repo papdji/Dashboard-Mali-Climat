@@ -8,9 +8,10 @@ import { map, switchMap } from 'rxjs/operators';
 export interface User {
   uid: string;
   email: string;
-  name?: string;
-  phone?: string;
+  photoURL?: string;
+  displayName?: string;
 }
+
 
 export interface Post {
   createdAt: firebase.default.firestore.FieldValue;
@@ -39,7 +40,7 @@ export interface Comment {
   providedIn: 'root'
 })
 export class PostService {
-  
+
 
   users: User[] | undefined;
   currentUser: any;

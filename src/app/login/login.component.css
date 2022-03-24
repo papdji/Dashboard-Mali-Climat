@@ -146,6 +146,17 @@
   color: #ff3a82;
   margin-left: 1rem;
 }
+mat-button-toggle-group {
+  margin-left: 12px;
+}
+.sign-in-card {
+  margin: auto;
+  width: 50%;
+  padding: 70px 0;
+}
+.center {
+  text-align: center;
+}
 
 
 @media screen and (max-width: 959px) {

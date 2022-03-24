@@ -1,6 +1,7 @@
 import { AngularFireAuth } from '@angular/fire/auth';
 import { Injectable } from '@angular/core';
-import { AngularFirestore } from '@angular/fire/firestore';
+import { AngularFirestore, AngularFirestoreDocument } from '@angular/fire/firestore';
+import { User } from '../post/post.service';
 
 
 @Injectable({
@@ -24,6 +25,21 @@ export class UserService {
   getUsersData() {
    return this.afStore.collection("users").valueChanges();
   }
+
+
+  private updateUserData(user: { uid: any; email: any; displayName: any; photoURL: any; }) {
+    // Sets user data to firestore on login
+    const userRef: AngularFirestoreDocument<User> = this.afStore.doc(`users/${user.uid}`);
+
+    const data = {
+      uid: user.uid,
+      email: user.email,
+      displayName: user.displayName,
+      photoURL: user.photoURL
+    };
+
+  }
+
 
   getUserData(id: string) {
     return this.afStore.collection("users").doc(id);

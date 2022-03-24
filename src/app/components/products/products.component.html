@@ -1,31 +1,28 @@
 <div class="container">
   <h2 class="text-center">Tous les Conseils</h2>
-  <button class="btn btn-success" data-bs-toggle="modal" data-bs-target="#addProductModal">Ajouter un nouveau Conseil</button>
+  <button class="glow-on-hover" data-bs-toggle="modal" data-bs-target="#addProductModal">Ajouter un nouveau Conseil</button>
   <table class="table">
     <thead>
       <tr>
-        <th scope="col">#</th>
+        <th scope="col">Id</th>
         <th scope="col">Non de la ville</th>
         <th scope="col">Description</th>
         <th scope="col">Image</th>
-        <th scope="col">Utilisateur</th>
-        <th scope="col">Catégorie</th>
-        <th scope="col">Contrôles</th>
+        <th scope="col">Action</th>
       </tr>
     </thead>
     <tbody>
-      <tr *ngFor="let post of allPosts; index as i">
+      <tr *ngFor="let product of allProducts; index as i">
         <th scope="row">{{i + 1}}</th>
-        <td>{{ post.from }}</td>
-        <td>{{ post.createdAt?.toMillis() | date:'short' }}</td>
-        <td>{{ post.ville }}</td>
+        <td>{{product.Name}}</td>
+        <td>{{product.Description}}</td>
         <td><img [src]="product.Image" style="max-width: 50px;"></td>
-        <ng-container *ngFor="let user of allUsers">
-          <td *ngIf="product.uid == uid">{{user.name}}</td>
+        <!-- <ng-container *ngFor="let user of allUsers">
+          <td *ngIf="product.userID == user.ID">{{user.Name}}</td>
         </ng-container>
         <ng-container *ngFor="let cat of allCategories">
           <td *ngIf="product.catID == cat.CatId">{{cat.Name}}</td>
-        </ng-container>
+        </ng-container> -->
         <td>
           <button class="btn btn-success" (click)=selectProduct(product.ID) data-bs-toggle="modal" data-bs-target="#updateProductModal"><i class="fas fa-edit"></i></button>
           <button class="btn btn-danger" (click)=delete(product.ID)><i class="fas fa-trash"></i></button>
@@ -71,7 +68,7 @@
           </div>
           <div class="alert alert-danger" *ngIf="Image.errors?.required && Image.touched">Image est rquis</div>
 
-          <div class="input-group mb-3">
+          <!-- <div class="input-group mb-3">
             <label class="input-group-text" for="users">Utilisateur</label>
             <select class="form-select" id="users" name="uid" #uid="ngModel" ngModel required>
               <ng-container *ngFor="let user of allUsers">
@@ -89,7 +86,7 @@
               </ng-container>
             </select>
           </div>
-          <div class="alert alert-danger" *ngIf="categoryId.errors?.required && categoryId.touched">Le nom de la Catégorie est requis</div>
+          <div class="alert alert-danger" *ngIf="categoryId.errors?.required && categoryId.touched">Le nom de la Catégorie est requis</div> -->
 
 
           <div class="modal-footer">
@@ -130,7 +127,16 @@
           </div>
           <div class="alert alert-danger" *ngIf="Description.errors?.required && Description.touched">Description Requis</div>
 
-          <div class="input-group mb-3">
+          <div class="mb-3">
+            <label for="exampleInputImage" class="form-label">Image</label>
+            <input class="form-control" type="file" accept=".jpg, .png" name="Image" (change)="uploadImage($event)" #Image="ngModel" ngModel required> <br>
+            <div class="progress" *ngIf="percentage | async as pct">
+              <progress class="progress-bar" role="progressbar" [style.width.%]="pct" [value]="pct" aria-valuemin="0" aria-valuemax="100"><span>100%</span></progress>
+          </div>
+          </div>
+          <div class="alert alert-danger" *ngIf="Image.errors?.required && Image.touched">Image est rquis</div>
+
+          <!-- <div class="input-group mb-3">
             <label class="input-group-text" for="users">Utilisateur</label>
             <select class="form-select" id="users" name="uid" #uid="ngModel" [(ngModel)]="product.uid" required>
               <ng-container *ngFor="let user of allUsers">
@@ -148,7 +154,7 @@
               </ng-container>
             </select>
           </div>
-          <div class="alert alert-danger" *ngIf="categoryId.errors?.required && categoryId.touched">Nom de la categorie est Requis</div>
+          <div class="alert alert-danger" *ngIf="categoryId.errors?.required && categoryId.touched">Nom de la categorie est Requis</div> -->
 
           <div class="modal-footer">
             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fermer</button>

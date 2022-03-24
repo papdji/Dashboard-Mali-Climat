@@ -9,14 +9,14 @@ export class ProductService {
   constructor(private afStore: AngularFirestore) { }
 
   getProductsData() {
-    return this.afStore.collection("posts").snapshotChanges();
+    return this.afStore.collection("conseils").snapshotChanges();
    }
 
    getProductData(id: string) {
-    return this.afStore.collection("posts").ref.doc(id).get();
+    return this.afStore.collection("conseils").ref.doc(id).get();
   }
 
   deleteProduct(id:string) {
-    return this.afStore.collection("posts").doc(id).delete()
+    return this.afStore.collection("conseils").doc(id).delete()
   }
 }
