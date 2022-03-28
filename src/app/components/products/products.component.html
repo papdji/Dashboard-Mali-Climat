@@ -17,12 +17,7 @@
         <td>{{product.Name}}</td>
         <td>{{product.Description}}</td>
         <td><img [src]="product.Image" style="max-width: 50px;"></td>
-        <!-- <ng-container *ngFor="let user of allUsers">
-          <td *ngIf="product.userID == user.ID">{{user.Name}}</td>
-        </ng-container>
-        <ng-container *ngFor="let cat of allCategories">
-          <td *ngIf="product.catID == cat.CatId">{{cat.Name}}</td>
-        </ng-container> -->
+
         <td>
           <button class="btn btn-success" (click)=selectProduct(product.ID) data-bs-toggle="modal" data-bs-target="#updateProductModal"><i class="fas fa-edit"></i></button>
           <button class="btn btn-danger" (click)=delete(product.ID)><i class="fas fa-trash"></i></button>
@@ -65,30 +60,9 @@
             <div class="progress" *ngIf="percentage | async as pct">
               <progress class="progress-bar" role="progressbar" [style.width.%]="pct" [value]="pct" aria-valuemin="0" aria-valuemax="100"><span>100%</span></progress>
           </div>
+
           </div>
           <div class="alert alert-danger" *ngIf="Image.errors?.required && Image.touched">Image est rquis</div>
-
-          <!-- <div class="input-group mb-3">
-            <label class="input-group-text" for="users">Utilisateur</label>
-            <select class="form-select" id="users" name="uid" #uid="ngModel" ngModel required>
-              <ng-container *ngFor="let user of allUsers">
-                <option [value]="uid">{{user.name}}</option>
-              </ng-container>
-            </select>
-          </div>
-          <div class="alert alert-danger" *ngIf="uid.errors?.required && uid.touched">Nom d'utilisateur est requis</div>
-
-          <div class="input-group mb-3">
-            <label class="input-group-text" for="category">Categories</label>
-            <select class="form-select" id="category" name="categoryId" #categoryId="ngModel" ngModel required>
-              <ng-container *ngFor="let category of allCategories">
-                <option [value]="category.CatId">{{category.Name}}</option>
-              </ng-container>
-            </select>
-          </div>
-          <div class="alert alert-danger" *ngIf="categoryId.errors?.required && categoryId.touched">Le nom de la Catégorie est requis</div> -->
-
-
           <div class="modal-footer">
             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fermer</button>
             <button type="button" type="submit" class="btn btn-primary" [disabled]="f.invalid">Ajouter</button>

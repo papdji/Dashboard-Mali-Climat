@@ -21,7 +21,7 @@ export class ProductsComponent implements OnInit, OnDestroy {
   getUsers?: Subscription
   allCategories : any = [];
   today:any;
-  // getCategories?: Subscription
+ 
 
   task?: AngularFireUploadTask
   ref?: AngularFireStorageReference
@@ -42,12 +42,6 @@ export class ProductsComponent implements OnInit, OnDestroy {
      private proServ: ProductService) {
 
     this.getUsers = this.userServ.getUsersData().subscribe(data=> this.allUsers = data);
-
-    // this.getCategories = this.catServ.getCategoriesData().subscribe(data=> {
-    //   this.allCategories = data.map(element => {
-    //     return element.payload.doc.data()
-    //   })
-    // });
 
     this.getProducts = this.proServ.getProductsData().subscribe(data => {
       this.allProducts = data.map(element => {
@@ -102,7 +96,7 @@ export class ProductsComponent implements OnInit, OnDestroy {
     var mm = String(this.today.getMonth() + 1).padStart(2, '0'); //January is 0!
     var yyyy = this.today.getFullYear();
 
-    this.today = mm + '/' + dd + '/' + yyyy;
+    this.today = dd + '/' + mm + '/' + yyyy;
     console.log(this.today);
 
     this.afStore.collection("conseils").add({
@@ -141,8 +135,7 @@ export class ProductsComponent implements OnInit, OnDestroy {
       Description: data.Description,
       Image: this.imgUrl,
       ID: Math.random().toString(36).substr(2, 9)
-      // userID: data.userId,
-      // catID: data.categoryId
+
     }).then(() => {
       this.closeButtonUpdate.nativeElement.click()
       this.successMsg = "Mis en jour avec succès"
@@ -156,8 +149,7 @@ export class ProductsComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy(): void {
-    // this.getCategories?.unsubscribe()
-    // this.getUsers?.unsubscribe()
+
     this.getProducts?.unsubscribe()
   }
 }
