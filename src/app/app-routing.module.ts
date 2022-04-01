@@ -5,6 +5,7 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { UsersComponent } from './components/users/users.component';
 import { PostsComponent } from './posts/posts.component';
+import { LoginComponent } from './login/login.component';
 
 const routes: Routes = [
   {path: '', component: HomeComponent},
@@ -12,7 +13,7 @@ const routes: Routes = [
   {path: 'categories', component: CategoriesComponent},
   {path: 'products', component: ProductsComponent},
   {path: 'posts', component: PostsComponent},
-  {path: 'login', component: PostsComponent},
+  {path: 'login', component: LoginComponent},
 ];
 
 @NgModule({
