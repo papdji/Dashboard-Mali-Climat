@@ -65,9 +65,12 @@ export class UsersComponent implements OnInit {
   }
 
   delete(id:string) {
-    this.userServ.deleteUser(id).then(() => {
-      this.successMsg = "Utilisateur supprimé avec succès"
+    this.afStore.collection("users").doc(id).update({
+      etat:"DESACTIVER"
     })
+    // this.userServ.deleteUser(id).then(() => {
+    //   this.successMsg = "Utilisateur supprimé avec succès"
+    // })
   }
 
 }
