@@ -3,6 +3,8 @@ import { AngularFirestore } from '@angular/fire/firestore';
 import { NgForm } from '@angular/forms';
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { UserService } from 'src/app/services/user/user.service';
+import Swal from 'sweetalert2';
+
 
 @Component({
   selector: 'app-users',
@@ -64,13 +66,27 @@ export class UsersComponent implements OnInit {
     })
   }
 
-  delete(id:string) {
-    this.afStore.collection("users").doc(id).update({
-      etat:"DESACTIVER"
-    })
+  delete(id:string){Swal.fire({
+    title: 'Etes vous sure?',
+    text: "L'utilisateur sera supprimer'",
+    icon: 'warning',
+    showCancelButton: true,
+    confirmButtonText: 'Continuer',
+    cancelButtonText: 'Annuler',
+    confirmButtonColor:'#1cd835',
+  }).then((result) => {
+    if (result.isConfirmed) {
+      this.afStore.collection("users").doc(id).update({
+        etat:"DESACTIVER",})
+    } else if (result.isDismissed) {
+    }
+  });
+}
+
+
     // this.userServ.deleteUser(id).then(() => {
     //   this.successMsg = "Utilisateur supprimé avec succès"
     // })
   }
 
-}
+

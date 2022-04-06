@@ -7,6 +7,7 @@ import { CategoryService } from 'src/app/services/category/category.service';
 import { UserService } from 'src/app/services/user/user.service';
 import { AngularFireUploadTask, AngularFireStorageReference, AngularFireStorage } from '@angular/fire/storage';
 import { ProductService } from 'src/app/services/product/product.service';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-products',
@@ -21,7 +22,7 @@ export class ProductsComponent implements OnInit, OnDestroy {
   getUsers?: Subscription
   allCategories : any = [];
   today:any;
- 
+
 
   task?: AngularFireUploadTask
   ref?: AngularFireStorageReference
@@ -142,7 +143,15 @@ export class ProductsComponent implements OnInit, OnDestroy {
     })
   }
 
-  delete(id:string) {
+  delete(id:string) {Swal.fire({
+    title: 'Etes vous sure?',
+    text: "L'utilisateur sera supprimer'",
+    icon: 'warning',
+    showCancelButton: true,
+    confirmButtonText: 'Continuer',
+    cancelButtonText: 'Annuler',
+    confirmButtonColor:'#1cd835',
+  })
     this.proServ.deleteProduct(id).then(() => {
       this.successMsg = "Conseil supprimé avec succès"
     })
